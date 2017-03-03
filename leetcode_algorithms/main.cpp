@@ -9,19 +9,21 @@ int main() {
 	Solution* solution = new Solution();
 	clock_t tstart, tend;
 	double duration;
-	//std::vector<int> nums = { 2, 5, 5, 10, 234, 32, 32, 432, 324235, 32, 123, 45 };
-	//int target = 168;
+	/* leetcode 1 test case
+	std::vector<int> nums = { 2, 5, 5, 10, 234, 32, 32, 432, 324235, 32, 123, 45 };
+	int target = 168;
 
-	//// run solution
-	//tstart = clock();
-	//std::vector<int> result = solution->twoSum(nums, target);
-	//tend = clock();
+	// run solution
+	tstart = clock();
+	std::vector<int> result = solution->twoSum(nums, target);
+	tend = clock();
 
-	//// result output
-	//duration = (double)(tend - tstart);
-	//std::cout << "[" << result[0] << ", " << result[1] << "]" << std::endl;
-	//std::cout << duration << "ms" << std::endl;
-
+	// result output
+	duration = (double)(tend - tstart);
+	std::cout << "[" << result[0] << ", " << result[1] << "]" << std::endl;
+	std::cout << duration << "ms" << std::endl;
+	*/
+	/* leetcode 2 test case
 	vector<int> list1 = { 7 };
 	vector<int> list2 = { 5};
 	ListNode* head, * cur, * l1, * l2;
@@ -50,6 +52,10 @@ int main() {
 		cout << head->val << endl;
 		head = head->next;
 	}
+	*/
 
+	string s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+	string ss = "vdvf";
+	cout << solution->lengthOfLongestSubstring(ss) << endl;
 	return 0;
 }

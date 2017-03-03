@@ -1,6 +1,7 @@
 #include "Solution.h"
 
 #include <unordered_map>
+#include <iostream>
 #include <algorithm>
 using namespace std;
 
@@ -44,4 +45,46 @@ ListNode* Solution::addTwoNumbers(ListNode* l1, ListNode* l2) {
 		l2 = l2 ? l2->next : NULL;
 	}
 	return head.next;
+}
+
+int Solution::lengthOfLongestSubstring(string s) {
+	if (s.length() == 0) {
+		return 0;
+	}
+	int count = 0;
+	int i = 0, j = 0;// i子串头，j子串尾
+	int letter[126] = { 0 };// 记录字符是否存在
+
+	while (j < s.length()) {
+		if (!(letter[s[j] - 1])) {
+			letter[s[j] - 1]++;
+		}
+		else {
+			int sum = j - i;
+			count = sum > count ? sum : count;
+			i++; // 开始下一个子串遍历
+			j = i - 1; // 因为循环结尾要j++，这里加-1为了重置子串尾与头在同一位置
+			memset(letter, 0, sizeof(letter));
+		}
+		if (j == s.length() - 1) {
+			return count > s.length() - i ? count : s.length() - i; // s.lenght - 1 - i + 1;
+		}
+		j++;
+	}
+}
+
+int Solution::lengthOfLongestSubString2(string s) {
+	int start = 0, i, max = 0;
+	int visited[256];
+	memset(visited, -1, sizeof(visited));
+	for (i = 0; i<s.size(); i++)
+	{
+		if (visited[s[i]] >= start)
+		{
+			max = (i - start)>max ? (i - start) : max;
+			start = visited[s[i]] + 1;
+		}
+		visited[s[i]] = i;
+	}
+	return max>(i - start) ? max : (i - start);
 }

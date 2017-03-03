@@ -3,7 +3,7 @@
 #define SOLUTION_H
 
 #include "structure_def.h"
-
+#include <string>
 #include <vector>
 
 class Solution {
@@ -15,7 +15,11 @@ public:
 	std::vector<int> twoSum2(std::vector<int>& nums, int target);
 
 	/* leetcode algorithms 2 https://leetcode.com/problems/add-two-numbers/?tab=Description */
-	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2);
+	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2); // [52ms]
+
+	/* leetcode algorithms 3 https://leetcode.com/problems/longest-substring-without-repeating-characters/?tab=Description */
+	int lengthOfLongestSubstring(std::string s);// [36ms]
+	int lengthOfLongestSubString2(std::string s);// ¶¯Ì¬¹æ»® [18ms]
 };
 #endif // !SOLUTION_H
 
