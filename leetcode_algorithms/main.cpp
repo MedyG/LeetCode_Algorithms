@@ -53,9 +53,12 @@ int main() {
 		head = head->next;
 	}
 	*/
-
+	/* leetcode 3 test case
 	string s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 	string ss = "vdvf";
 	cout << solution->lengthOfLongestSubstring(ss) << endl;
+	*/
+
+	cout << solution->numSquares(8);
 	return 0;
 }

@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <iostream>
 #include <algorithm>
+#include <array>
+#include <math.h>
 using namespace std;
 
 std::vector<int> Solution::twoSum(std::vector<int>& nums, int target) {
@@ -72,7 +74,6 @@ int Solution::lengthOfLongestSubstring(string s) {
 		j++;
 	}
 }
-
 int Solution::lengthOfLongestSubString2(string s) {
 	int start = 0, i, max = 0;
 	int visited[256];
@@ -87,4 +88,74 @@ int Solution::lengthOfLongestSubString2(string s) {
 		visited[s[i]] = i;
 	}
 	return max>(i - start) ? max : (i - start);
+}
+
+int Solution::numSquares(int n) {
+	if (n == 1) return 1;
+	static vector<int> dp({ 0 });
+	/* i表示从0到n的数，j表示平方根 */
+	while(dp.size() <= n) {
+		int i = dp.size();
+		int perfect_nums = INT_MAX;
+		// j * j <= i，剪枝操作，减少不必要的计算量
+		for (int j = 1; j * j <= i; j++) {
+			/* 在dp数组里面找已经储存的最小值 */
+			perfect_nums = min(perfect_nums, dp[i - j * j] + 1);
+		}
+		dp.push_back(perfect_nums);
+	}
+
+	return dp[n];
+}
+int Solution::numSquares2(int n) {
+	int*dp = new int[n];
+	memset(dp, 0,n * sizeof(int));
+	int res = numSquares_dfs(n, 0, dp);
+	return res;
+}
+int Solution::numSquares_dfs(int n, int count, int *dp) {
+
+	if (n == 0) { //已经数字n分解完，直接返回count
+		return count;
+	}
+
+	int c = 0;
+	if ((c = dp[n - 1]) != 0) { //若在状态数组中能找到解，直接返回，
+		return count + c;       //并且还需要加上已经使用的个数
+	}
+
+	//从所有的解中找出使用数字最少的
+	int res = INT_MAX;
+	int j = (int)sqrt(n);
+	for (int i = j; i >= (j / 2 + 1); i--) {
+		int num = n - pow(i, 2);
+		int c = numSquares_dfs(num, count + 1, dp);
+		res = min(res, c);
+	}
+	dp[n - 1] = res - count; //计算完成后，将结果保存到状态数组中
+	return res;
+}
+int Solution::numSquares3(int n) {
+	int sqrt_n = sqrt(n);
+	int _n = n;
+	if (sqrt_n * sqrt_n == n) {
+		return 1;
+	}
+	/* Legendre's three-square theorem 
+	 * 满足n = 4^k(8m + 7)的数
+	 * 能表示为4个数的平方和 
+	 */
+	while (n % 4 == 0) {
+		n /= 4;
+	}
+	if (n % 8 == 7) {
+		return 4;
+	}
+	/* 是否能用两个数的平方和可以表示 */
+	for (int i = 1; i <= sqrt_n; i++) {
+		if ((int)pow((int)sqrt(_n - i * i), 2) == _n - i * i) {
+			return 2;
+		}
+	}
+	return 3;
 }
