@@ -90,6 +90,39 @@ int Solution::lengthOfLongestSubString2(string s) {
 	return max>(i - start) ? max : (i - start);
 }
 
+vector<vector<int>> Solution::fourSum(vector<int>&nums, int target) {
+	vector<vector<int>> result;
+	if (nums.size() < 4) return result;
+	//sort(nums.begin(), nums.end());
+	for (vector<int>::iterator i = nums.begin(); i != nums.end() - 3; ++i) {
+		for (vector<int>::iterator j = i + 1; j != nums.end() - 2; ++j) {
+			for (vector<int>::iterator k = j + 1; k != nums.end() - 1; ++k) {
+				for (vector<int>::iterator l = k + 1; l != nums.end(); ++l) {
+					int fsum = *i + *j + *k + *l;
+					if (fsum == target) {
+						if (result.size() == 0) {
+							result.push_back({ *i, *j, *k, *l });
+							continue;
+						}
+						int len = result.size();
+						bool isExist = false;
+						for (int m = 0; m < len; m++) {
+							if (result[m][0] == *i && result[m][1] == *j && result[m][2] == *k && result[m][3] == *l) {
+								isExist = true;
+								break;
+							}
+						}
+						if (!isExist) {
+							result.push_back({ *i, *j, *k, *l });
+						}
+					}
+				}
+			}
+		}
+	}
+	return result;
+}
+
 int Solution::numSquares(int n) {
 	if (n == 1) return 1;
 	static vector<int> dp({ 0 });
