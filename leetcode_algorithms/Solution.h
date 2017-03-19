@@ -22,7 +22,7 @@ public:
 	int lengthOfLongestSubString2(std::string s);// 动态规划 [18ms]
 	
 	/* leetcode algorithms 18 https://leetcode.com/problems/4sum/?tab=Description */
-	std::vector<std::vector<int>> fourSum(std::vector<int>& nums, int target);
+	std::vector<std::vector<int>> fourSum(std::vector<int>& nums, int target); // [15ms] 
 
 	/* leetcode algorithms 279 https://leetcode.com/problems/perfect-squares/?tab=Description */
 	int numSquares(int n); // [6ms] 静态数组动态规划

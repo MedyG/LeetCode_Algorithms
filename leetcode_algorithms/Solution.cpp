@@ -93,29 +93,26 @@ int Solution::lengthOfLongestSubString2(string s) {
 vector<vector<int>> Solution::fourSum(vector<int>&nums, int target) {
 	vector<vector<int>> result;
 	if (nums.size() < 4) return result;
-	//sort(nums.begin(), nums.end());
+	sort(nums.begin(), nums.end());
 	for (vector<int>::iterator i = nums.begin(); i != nums.end() - 3; ++i) {
+		if (i != nums.begin() && *i == *(i - 1)) continue; //去掉冗余的a
+		if (*i + *(i + 1) + *(i + 2) + *(i + 3) > target) break; //删减不可能的数组
+		if (*i + *(nums.end() - 3) + *(nums.end() - 2) + *(nums.end() - 1) < target) continue; //快速去掉过小的数
 		for (vector<int>::iterator j = i + 1; j != nums.end() - 2; ++j) {
-			for (vector<int>::iterator k = j + 1; k != nums.end() - 1; ++k) {
-				for (vector<int>::iterator l = k + 1; l != nums.end(); ++l) {
-					int fsum = *i + *j + *k + *l;
-					if (fsum == target) {
-						if (result.size() == 0) {
-							result.push_back({ *i, *j, *k, *l });
-							continue;
-						}
-						int len = result.size();
-						bool isExist = false;
-						for (int m = 0; m < len; m++) {
-							if (result[m][0] == *i && result[m][1] == *j && result[m][2] == *k && result[m][3] == *l) {
-								isExist = true;
-								break;
-							}
-						}
-						if (!isExist) {
-							result.push_back({ *i, *j, *k, *l });
-						}
-					}
+			if (j != i + 1 && *j == *(j - 1)) continue; //去掉冗余的b
+			if (*i + *j + *(j + 1) + *(j + 2) > target) break;
+			if (*i + *j  + *(nums.end() - 2) + *(nums.end() - 1) < target) continue;
+			vector<int>::iterator third = j + 1, forth = nums.end() - 1;
+			while (third < forth) {
+				int sum = *i + *j + *third + *forth;
+				if (sum < target) ++third;
+				else if (sum > target) --forth;
+				else {
+					result.push_back({ *i, *j, *third, *forth });
+					third++;
+					while (third < forth && *third == *(third - 1)) ++third; //去掉冗余的c
+					forth--;
+					while (third < forth && *forth == *(forth + 1)) --forth; //去掉冗余的d
 				}
 			}
 		}
@@ -137,7 +134,6 @@ int Solution::numSquares(int n) {
 		}
 		dp.push_back(perfect_nums);
 	}
-
 	return dp[n];
 }
 int Solution::numSquares2(int n) {
