@@ -21,6 +21,9 @@ public:
 	int lengthOfLongestSubstring(std::string s);// [36ms]
 	int lengthOfLongestSubString2(std::string s);// ¶¯Ì¬¹æ»® [18ms]
 	
+	/* leetcode algorithms 8 https://leetcode.com/problems/string-to-integer-atoi/#/description */
+	int myAtoi(std::string str); // [19ms]
+
 	/* leetcode algorithms 18 https://leetcode.com/problems/4sum/?tab=Description */
 	std::vector<std::vector<int>> fourSum(std::vector<int>& nums, int target); // [15ms] 
 

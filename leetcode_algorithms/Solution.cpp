@@ -90,6 +90,30 @@ int Solution::lengthOfLongestSubString2(string s) {
 	return max>(i - start) ? max : (i - start);
 }
 
+int Solution::myAtoi(string str) {
+	if (str.empty() || str == "") return 0;
+	bool nagetive = false;
+	int i = 0;
+	int res = 0;
+	// i = str.find_first_not_of(' ');
+	while (str[i] == ' ') {
+		i++;
+	}
+	if (str[i] == '-' || str[i] == '+') {
+		nagetive = str[i++] == '-' ? true : false;
+	}
+	while (isdigit(str[i])) {
+		int oldres = res;
+		res = res * 10 + (str[i++] - '0');
+		//if (res > INT_MAX && !nagetive) return INT_MAX;
+		//if (res > INT_MAX && nagetive) return INT_MIN;
+		if (res / 10 != oldres) {
+			return nagetive ? INT_MIN : INT_MAX;
+		}
+	}
+	return nagetive ? 0 - res : res;
+}
+
 vector<vector<int>> Solution::fourSum(vector<int>&nums, int target) {
 	vector<vector<int>> result;
 	if (nums.size() < 4) return result;

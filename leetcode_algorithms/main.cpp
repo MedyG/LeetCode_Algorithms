@@ -59,6 +59,11 @@ int main() {
 	cout << solution->lengthOfLongestSubstring(ss) << endl;
 	*/
 
+	/* leetcode 8 test case
+	string str = "1  -1 a42";
+	cout << str << " => " << solution->myAtoi(str) << endl;*/
+
+	/* leetcode 18 test case
 	vector<int> nums2 = { 91277418,66271374,38763793,4092006,11415077,60468277,1122637,72398035,
 		-62267800,22082642,60359529,-16540633,92671879,-64462734,-55855043,-40899846,88007957,
 		-57387813,-49552230,-96789394,18318594,-3246760,-44346548,-21370279,42493875,25185969,
@@ -90,7 +95,7 @@ int main() {
 			}
 		}
 	}
-	cout << "}" << endl;
+	cout << "}" << endl;*/
 
 	/* leetcode 279 test case 
 	cout << solution->numSquares(8);
