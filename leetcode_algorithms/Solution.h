@@ -9,10 +9,8 @@
 class Solution {
 public:
 	/* leetcode algorithms 1 https://leetcode.com/problems/two-sum/?tab=Description */
-	// my solution [213ms]
-	std::vector<int> twoSum(std::vector<int>& nums, int target);
-	// solution from internet [13ms]
-	std::vector<int> twoSum2(std::vector<int>& nums, int target);
+	std::vector<int> twoSum(std::vector<int>& nums, int target);// my solution [213ms]
+	std::vector<int> twoSum2(std::vector<int>& nums, int target);// solution from internet [13ms]
 
 	/* leetcode algorithms 2 https://leetcode.com/problems/add-two-numbers/?tab=Description */
 	ListNode* addTwoNumbers(ListNode* l1, ListNode* l2); // [52ms]
@@ -31,6 +29,12 @@ public:
 	int numSquares(int n); // [6ms] 静态数组动态规划
 	int numSquares2(int n);// [39ms] 递归动态规划+dfs 
 	int numSquares3(int n);// [3ms] 四平方和数学解法
+
+	/* leetcode algorithms 292 https://leetcode.com/problems/nim-game/#/description */
+	bool canWinNim(int n);// [0ms]
+
+	/* leetcode algorithms 491 https://leetcode.com/problems/increasing-subsequences/#/description */
+	std::vector<std::vector<int>> findSubsequences(std::vector<int>& nums);
 
 
 private:

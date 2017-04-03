@@ -100,5 +100,30 @@ int main() {
 	/* leetcode 279 test case 
 	cout << solution->numSquares(8);
 	*/
+	for (int i = 160; i >= 0; i--) {
+		cout << (i) << " " << solution->canWinNim(i) << endl;
+	}
+	/* leetcode 491 test case
+	vector<int> nums = {4, 6, 7, 6, 7};
+	tstart = clock();
+	vector<vector<int>> result = solution->findSubsequences(nums);
+	tend = clock();
+	cout << tend - tstart << "ms" << endl;
+	cout << "{" << endl;
+	for (vector<vector<int>>::iterator it = result.begin(); it != result.end(); ++it) {
+		for (vector<int>::iterator i = it->begin(); i != it->end(); ++i) {
+			if (i == it->begin()) {
+				cout << "  [";
+			}
+			if (i == it->end() - 1) {
+				cout << *i << "]," << endl;
+			}
+			else {
+				cout << *i << ", ";
+			}
+		}
+	}
+	cout << "}" << endl;
+	*/
 	return 0;
 }

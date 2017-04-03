@@ -212,3 +212,40 @@ int Solution::numSquares3(int n) {
 	}
 	return 3;
 }
+
+bool Solution::canWinNim(int n) {
+	return n & (0b11);
+}
+
+vector<vector<int>> Solution::findSubsequences(vector<int>& nums) {
+	vector<vector<int>> sequences;
+	vector<vector<int>> res;
+	vector<int> sequence;
+	int visited[256] = { 0 };
+	int maxV = 0;
+	if (nums.size() < 2) return res;
+	for (vector<int>::iterator it = nums.begin(); it != nums.end() - 1; ++it) {
+		for (int i = 0; i < maxV; i++) {
+			visited[i] = 0;
+		}
+		visited[*it + 100]++;
+		sequences.clear();
+		sequences.push_back({*it});
+		for (vector<int>::iterator j = it + 1; j != nums.end(); ++j) {
+			int len = sequences.size();
+			for (int k = 0; k < len; k++) {
+				if ((visited[*j + 100] <= 0 && *j > sequences[k].back()) || (visited[*j + 100] > 0 && *j == sequences[k].back())) {
+					maxV = *j + 101;
+					sequence = sequences[k];
+					sequence.push_back(*j);
+					sequences.push_back(sequence);
+					if (sequence.size() > 1) {
+						res.push_back(sequence);
+					}
+				}
+			}
+			visited[*j + 100]++;
+		}
+	}
+	return res;
+}
