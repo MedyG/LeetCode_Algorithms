@@ -144,6 +144,45 @@ vector<vector<int>> Solution::fourSum(vector<int>&nums, int target) {
 	return result;
 }
 
+double Solution::myPow(double x, int n) {
+	vector<double> fx; // 使用数组记录低阶的计算结果
+	double res = 1;
+	int nagetive = 1;
+	long long int _n = n; // 使用更大的类型以储存 (0 - INT_MIN)
+	if (_n == 0) return res;
+	if (_n < 0) {
+		nagetive = -1;
+		_n = 0 - _n;
+	}
+	int e = 1; // 2^e, e∈Z+
+	fx.push_back(res); // x^0
+	res *= x;
+	fx.push_back(res); // x^1
+	while (_n > 0) {
+		/* 找到最大的2的e次方，满足对n的分解：
+			n = 2^e + k1*2^(e - 1) + ... + ke*2^0 
+			其中 k1~ke ∈ {0, 1} */
+		if (_n > pow(2, e)) {
+			res *= fx.back(); // x^2, x^4, ..., x^(2^e)
+			fx.push_back(res);
+			e++;
+		}
+		else {
+			/* 找到最大的e之后找剩下的阶数 */
+			_n -= pow(2, e - 1);
+			for (int i = e - 1; _n > 0; i--) {
+				if (_n >= pow(2, i)) {
+					_n -= pow(2, i);
+					res *= fx[i + 1]; // 从数组获取低阶的计算结果
+				}
+			}
+			break;
+		};
+	}
+	if (nagetive == -1) res = 1 / res;
+	return res;
+}
+
 int Solution::numSquares(int n) {
 	if (n == 1) return 1;
 	static vector<int> dp({ 0 });

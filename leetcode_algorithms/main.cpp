@@ -97,12 +97,17 @@ int main() {
 	}
 	cout << "}" << endl;*/
 
+	cout << solution->myPow(2, -2) << endl;
+
 	/* leetcode 279 test case 
 	cout << solution->numSquares(8);
 	*/
+
+	/* leetcode 292 test case 
 	for (int i = 160; i >= 0; i--) {
 		cout << (i) << " " << solution->canWinNim(i) << endl;
-	}
+	}*/
+
 	/* leetcode 491 test case
 	vector<int> nums = {4, 6, 7, 6, 7};
 	tstart = clock();

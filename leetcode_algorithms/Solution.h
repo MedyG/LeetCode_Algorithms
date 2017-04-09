@@ -25,6 +25,9 @@ public:
 	/* leetcode algorithms 18 https://leetcode.com/problems/4sum/?tab=Description */
 	std::vector<std::vector<int>> fourSum(std::vector<int>& nums, int target); // [15ms] 
 
+	/* leetcode algorithms 50 https://leetcode.com/problems/powx-n/#/description */
+	double myPow(double x, int n);// [9ms]
+
 	/* leetcode algorithms 279 https://leetcode.com/problems/perfect-squares/?tab=Description */
 	int numSquares(int n); // [6ms] 静态数组动态规划
 	int numSquares2(int n);// [39ms] 递归动态规划+dfs 
