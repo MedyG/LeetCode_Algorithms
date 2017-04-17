@@ -4,6 +4,7 @@
 #include <iostream>
 #include <algorithm>
 #include <array>
+#include <stack>
 #include <math.h>
 using namespace std;
 
@@ -88,6 +89,24 @@ int Solution::lengthOfLongestSubString2(string s) {
 		visited[s[i]] = i;
 	}
 	return max>(i - start) ? max : (i - start);
+}
+
+int Solution::reverse(int x) {
+	if (x == INT_MIN) return 0;
+	int res = 0;
+	int isNag = 1;
+	int _x = x;
+	if (x < 0) {
+		isNag = -1;
+		_x = 0 - x;
+	}
+	while (_x > 0) {
+		int oldres = res;
+		res = (_x % 10) + res * 10;
+		if (res / 10 != oldres) return 0;
+		_x /= 10;
+	}
+	return res * isNag;
 }
 
 int Solution::myAtoi(string str) {
@@ -180,6 +199,46 @@ double Solution::myPow(double x, int n) {
 		};
 	}
 	if (nagetive == -1) res = 1 / res;
+	return res;
+}
+
+vector<vector<int>> Solution::pathSum(TreeNode* root, int sum) {
+	vector<vector<int>> res;
+	vector<TreeNode*> nodePath;
+	stack<TreeNode*> s;
+	TreeNode* currentNode = root;
+	int _sum = 0;
+	s.push(currentNode);
+	while (!s.empty()) {
+		currentNode = s.top();
+		s.pop();
+		if (currentNode == NULL) {
+			continue;
+		}
+		else {
+			nodePath.push_back(currentNode);
+			_sum += currentNode->val;
+			if (currentNode->right == NULL && currentNode->left == NULL) {
+				if (_sum == sum) {
+					vector<int> path;
+					for (vector<TreeNode*>::iterator it = nodePath.begin(); it != nodePath.end(); ++it) {
+						path.push_back((*it)->val);
+					}
+					res.push_back(path);
+				}
+				while (!nodePath.empty()) {
+					nodePath.pop_back();
+					_sum -= currentNode->val;
+					if (s.top() == nodePath.back()->right) {
+						break;
+					}
+				}
+				continue;
+			}
+			s.push(currentNode->right);
+			s.push(currentNode->left);
+		}
+	}
 	return res;
 }
 

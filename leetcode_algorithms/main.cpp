@@ -1,5 +1,6 @@
 #include "Solution.h"
 #include <time.h>
+#include <queue>
 #include <iostream>
 
 using namespace std;
@@ -58,6 +59,10 @@ int main() {
 	string ss = "vdvf";
 	cout << solution->lengthOfLongestSubstring(ss) << endl;
 	*/
+	/* leetcode 7 test case
+	int x = 123;
+	cout << x << " " << solution->reverse(x) << endl; */
+	
 
 	/* leetcode 8 test case
 	string str = "1  -1 a42";
@@ -97,7 +102,23 @@ int main() {
 	}
 	cout << "}" << endl;*/
 
-	cout << solution->myPow(2, -2) << endl;
+	/* leetcode 50 test case 
+	cout << solution->myPow(2, -2) << endl;*/
+
+	vector<int> input = { 5,4,8,11,NULL,13,4,7,2,NULL,NULL,5,1 };
+	int sum = 22;
+	queue<TreeNode*> q;
+	int index = 0;
+	TreeNode* root = new TreeNode(input[index]);
+	q.push(root);
+	while (!q.empty() && index < input.size()) {
+		root = q.front();
+
+	}
+	/*for (vector<int>::iterator it = input.begin(); it != input.end(); ++it) {
+
+	}*/
+	//TreeNode* root = new TreeNode(input[0]);
 
 	/* leetcode 279 test case 
 	cout << solution->numSquares(8);

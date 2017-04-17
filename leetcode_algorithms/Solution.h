@@ -19,6 +19,9 @@ public:
 	int lengthOfLongestSubstring(std::string s);// [36ms]
 	int lengthOfLongestSubString2(std::string s);// 动态规划 [18ms]
 	
+	/* leetcode algorithms 7 https://leetcode.com/problems/reverse-integer/#/description */
+	int reverse(int x); // [19ms]
+
 	/* leetcode algorithms 8 https://leetcode.com/problems/string-to-integer-atoi/#/description */
 	int myAtoi(std::string str); // [19ms]
 
@@ -27,6 +30,9 @@ public:
 
 	/* leetcode algorithms 50 https://leetcode.com/problems/powx-n/#/description */
 	double myPow(double x, int n);// [9ms]
+
+	/* leetcode algorithms 113 https://leetcode.com/problems/path-sum-ii/#/description */
+	std::vector<std::vector<int>> pathSum(TreeNode* root, int sum);
 
 	/* leetcode algorithms 279 https://leetcode.com/problems/perfect-squares/?tab=Description */
 	int numSquares(int n); // [6ms] 静态数组动态规划
