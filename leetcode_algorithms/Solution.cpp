@@ -204,8 +204,8 @@ double Solution::myPow(double x, int n) {
 
 vector<vector<int>> Solution::pathSum(TreeNode* root, int sum) {
 	vector<vector<int>> res;
-	vector<TreeNode*> nodePath;
-	stack<TreeNode*> s;
+	vector<TreeNode*> nodePath; // 储存路径节点
+	stack<TreeNode*> s; // 先序遍历实现
 	TreeNode* currentNode = root;
 	int _sum = 0;
 	s.push(currentNode);
@@ -218,6 +218,7 @@ vector<vector<int>> Solution::pathSum(TreeNode* root, int sum) {
 		else {
 			nodePath.push_back(currentNode);
 			_sum += currentNode->val;
+			/* 到达叶子节点 */
 			if (currentNode->right == NULL && currentNode->left == NULL) {
 				if (_sum == sum) {
 					vector<int> path;
@@ -226,15 +227,23 @@ vector<vector<int>> Solution::pathSum(TreeNode* root, int sum) {
 					}
 					res.push_back(path);
 				}
+				/* 栈顶的空节点不需要访问 */
+				while (!s.empty() && s.top() == NULL) { 
+					s.pop(); 
+				}
+				/* 先序遍历左儿子必定已经被查看，
+				因此只需判断路径中某节点右儿子
+				是否与栈顶节点相同 */
 				while (!nodePath.empty()) {
+					_sum -= nodePath.back()->val;
 					nodePath.pop_back();
-					_sum -= currentNode->val;
-					if (s.top() == nodePath.back()->right) {
+					if (!s.empty() && s.top() == nodePath.back()->right) {
 						break;
 					}
 				}
 				continue;
 			}
+			/* 先序遍历先访问左儿子，左儿子后入栈 */
 			s.push(currentNode->right);
 			s.push(currentNode->left);
 		}

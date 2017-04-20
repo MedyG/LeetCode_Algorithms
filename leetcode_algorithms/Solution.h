@@ -32,7 +32,7 @@ public:
 	double myPow(double x, int n);// [9ms]
 
 	/* leetcode algorithms 113 https://leetcode.com/problems/path-sum-ii/#/description */
-	std::vector<std::vector<int>> pathSum(TreeNode* root, int sum);
+	std::vector<std::vector<int>> pathSum(TreeNode* root, int sum); // [9ms]
 
 	/* leetcode algorithms 279 https://leetcode.com/problems/perfect-squares/?tab=Description */
 	int numSquares(int n); // [6ms] 静态数组动态规划

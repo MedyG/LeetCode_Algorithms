@@ -105,20 +105,57 @@ int main() {
 	/* leetcode 50 test case 
 	cout << solution->myPow(2, -2) << endl;*/
 
-	vector<int> input = { 5,4,8,11,NULL,13,4,7,2,NULL,NULL,5,1 };
-	int sum = 22;
+	//vector<int> input = { 5,4,8,11,NULL,13,4,7,2,NULL,NULL,5,1 };
+	vector<int>input = { -519,-283,-42,322,103,NULL,263,826,-706,920,691,-38,-765,NULL,NULL,-658,386,328,-214,-159,284,281,NULL,122,-920,59,NULL,-838,NULL,588,-167,824,723,-502,-17,-898,492,NULL,-373,884,777,603,-44,NULL,-723,-678,NULL,-426,536,683,NULL,-368,-845,-762,-218,-997,757,-992,685,-519,-990,NULL,-959,64,NULL,878,435,-640,NULL,NULL,481,-139,NULL,NULL,NULL,NULL,NULL,NULL,-273,433,-256,-47,NULL,-588,-547,764,681,NULL,-894,122,-162,521,-237,NULL,-132,-567,-148,199,-653,982,-752,-420,NULL,-535,877,NULL,-15,729,-294,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,350,-85,656,47,NULL,NULL,33,NULL,NULL,-219,NULL,NULL,822,NULL,-817,-944,-184,213,652,NULL,-11,NULL,529,389,-895,NULL,NULL,NULL,-933,NULL,484,-817,555,735,-232,NULL,-233,-566,196,285,-538,NULL,879,225,NULL,-213,NULL,NULL,NULL,NULL,NULL,NULL,-321,-887,NULL,NULL,685,-76,NULL,NULL,NULL,853,76,NULL,-512,-526,NULL,490,NULL,NULL,-318,-386,NULL,NULL,NULL,-400,NULL,NULL,934,604,NULL,NULL,NULL,NULL,149,-523,962,-501,-624,-743,-134,731,-468,-83,585,484,579,765,NULL,-125,480,NULL,NULL,836,NULL,NULL,NULL,NULL,NULL,NULL,-237,NULL,NULL,NULL,-833,-218,NULL,NULL,NULL,609,NULL,NULL,-129,NULL,NULL,928,NULL,-69,NULL,NULL,NULL,NULL,NULL,-189,NULL,NULL,NULL,NULL,NULL,-739,-388,NULL,NULL,NULL,-670,-550,NULL,-483,NULL,NULL,NULL,-850,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,-10,NULL,NULL,995,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,-388,880,NULL,-251,-988,NULL,NULL,NULL,NULL,615,-897,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,680,NULL,177,NULL,NULL,NULL,-485,NULL,-34,81,NULL,NULL,NULL,NULL,375,-371,NULL,699,NULL,NULL,NULL,-788,NULL,NULL,NULL,NULL,-847,490,-571,NULL,-151,NULL,NULL,-597,NULL,854,NULL,NULL,-715,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,-731,-845,384,201,NULL,NULL,NULL,NULL,NULL,-682,NULL,927 };
+	//int sum = 22;
+	int sum = -527;
 	queue<TreeNode*> q;
 	int index = 0;
-	TreeNode* root = new TreeNode(input[index]);
+	TreeNode* root = new TreeNode(input[index++]);
+	TreeNode* _root = root;
 	q.push(root);
 	while (!q.empty() && index < input.size()) {
 		root = q.front();
-
+		q.pop();
+		if (root == NULL) continue;
+		TreeNode* l, *r;
+		if (input[index] == NULL) {
+			l = NULL;
+			index++;
+		}
+		else {
+			l = new TreeNode(input[index++]);
+		}
+		if (input[index] == NULL) {
+			r = NULL;
+			index++;
+		}
+		else {
+			r = new TreeNode(input[index++]);
+		}
+		root->left = l;
+		root->right = r;
+		q.push(root->left);
+		q.push(root->right);
 	}
-	/*for (vector<int>::iterator it = input.begin(); it != input.end(); ++it) {
-
-	}*/
-	//TreeNode* root = new TreeNode(input[0]);
+	
+	vector<vector<int>> result;
+	result = solution->pathSum(_root, sum);
+	cout << "{" << endl;
+	for (vector<vector<int>>::iterator it = result.begin(); it != result.end(); ++it) {
+		for (vector<int>::iterator i = it->begin(); i != it->end(); ++i) {
+			if (i == it->begin()) {
+				cout << "  [";
+			}
+			if (i == it->end() - 1) {
+				cout << *i << "]," << endl;
+			}
+			else {
+				cout << *i << ", ";
+			}
+		}
+	}
+	cout << "}" << endl;
 
 	/* leetcode 279 test case 
 	cout << solution->numSquares(8);
