@@ -91,6 +91,65 @@ int Solution::lengthOfLongestSubString2(string s) {
 	return max>(i - start) ? max : (i - start);
 }
 
+string Solution::longestPalindrome(string s) {
+	if (s.length() <= 1) return s;
+	string res = "";
+	int front, rear, forward;
+	int end;
+	for (int i = 0; i < (int)s.length(); i++) {
+		forward = 0;
+		front = i;
+		end = rear = (int)s.length() - 1;
+		while (front < rear) {
+			while (s[front] == s[rear] && front <= rear) {
+				front++;
+				rear--;
+				forward++; 
+			}
+			/* 找到回文并且回文比最长的回文要长 */
+			if (front >= rear && end - i + 1 > res.length()) {
+				res = s.substr(i, end - i + 1);
+				break;
+			}
+			rear = rear + forward - 1;
+			front = i;
+			end = rear;
+			forward = 0;
+		}
+		if (res.length() >= s.length() - i) break; // 找到最长的回文就跳出
+	}
+	if (res == "") {
+		return s.substr(0,1);
+	}
+	return res;
+}
+string Solution::longestPalindrome2(string s) {
+	if (s.length() <= 1) return s;
+	vector<vector<int>> dp(s.length(), vector<int>(s.length(), 0)); // dp[i][j]记录从i到j是否为回文
+	int len = 0;
+	int start = 0, end = 0;
+	dp[0][0] = 1;
+	for (int i = 1; i < (int)s.length(); i++) {
+		dp[i][i] = 1;
+		dp[i][i - 1] = 1; // 子串长度为2时，dp[i][i+1]与dp[i+1][i]同状态
+	}
+	/* 枚举回文长度 */
+	for (int subStrLen = 1; subStrLen < s.length(); subStrLen++) {
+		/* 枚举回文开始位置 */
+		for (int head = 0; head + subStrLen < s.length(); head++) {
+			/* 回文去掉左右端字符仍然是回文 */
+			if (s[head + subStrLen] == s[head] && dp[head + 1][head + subStrLen - 1]) {
+				dp[head][head + subStrLen] = 1;
+				if (subStrLen > end - start) {
+					start = head;
+					end = start + subStrLen;
+					break;
+				}
+			}
+		}
+	}
+	return s.substr(start, end - start + 1);
+}
 int Solution::reverse(int x) {
 	if (x == INT_MIN) return 0;
 	int res = 0;

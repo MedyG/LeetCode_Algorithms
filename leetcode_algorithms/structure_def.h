@@ -2,13 +2,14 @@
 #ifndef STRUCTURE_DEF_H
 #define STRUCTURE_DEF_H
 #include <stdio.h>
+/* leetcode algorithms 2 Definition for a list node */
 struct ListNode {
 	int val;
 	ListNode *next;
 	ListNode(int x) : val(x), next(NULL) {};
 };
 
-/* Definition for a binary tree node.*/
+/* leetcode algorithms 113 Definition for a binary tree node.*/
 struct TreeNode {
 	int val;
 	TreeNode *left;

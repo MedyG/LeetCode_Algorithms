@@ -19,6 +19,10 @@ public:
 	int lengthOfLongestSubstring(std::string s);// [36ms]
 	int lengthOfLongestSubString2(std::string s);// 动态规划 [18ms]
 	
+	/* leetcode algorithms 5  https://leetcode.com/problems/longest-palindromic-substring/#/description */
+	std::string longestPalindrome(std::string s); // [252ms] O(n^3)
+	std::string longestPalindrome2(std::string s); // [75ms] 动态规划
+
 	/* leetcode algorithms 7 https://leetcode.com/problems/reverse-integer/#/description */
 	int reverse(int x); // [19ms]
 
