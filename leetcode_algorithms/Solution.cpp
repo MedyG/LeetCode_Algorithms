@@ -6,6 +6,8 @@
 #include <array>
 #include <stack>
 #include <math.h>
+#include <unordered_set>
+#include <functional>
 using namespace std;
 
 std::vector<int> Solution::twoSum(std::vector<int>& nums, int target) {
@@ -306,6 +308,38 @@ vector<vector<int>> Solution::pathSum(TreeNode* root, int sum) {
 			s.push(currentNode->right);
 			s.push(currentNode->left);
 		}
+	}
+	return res;
+}
+
+int Solution::longestConsecutive(vector<int>& nums) {
+	unordered_set<int> set(nums.begin(), nums.end());
+	int res = 0;
+	for (int n : nums) {
+		if (set.find(n) == set.end()) continue;
+		set.erase(n); // 使用erase删除已访问元素
+		int prev = n - 1, next = n + 1;
+		while (set.find(prev) != set.end()) set.erase(prev--);
+		while (set.find(next) != set.end()) set.erase(next++);
+		res = max(res, next - prev - 1);
+	}
+	return res;
+}
+int Solution::longestConsecutive2(vector<int>& nums) {
+	sort(nums.begin(), nums.end(), greater<int>());
+	int res = 0;
+	int num;
+	while (!nums.empty()) {
+		num = nums.back();
+		nums.pop_back();
+		int count = 1;
+		while ((!nums.empty()) && num == nums.back() - 1) {
+			num = nums.back();
+			nums.pop_back();
+			while (!nums.empty() && nums.back() == num) nums.pop_back();
+			count++;
+		}
+		res = max(res, count);
 	}
 	return res;
 }

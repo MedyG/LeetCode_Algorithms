@@ -24,6 +24,7 @@ int main() {
 	std::cout << "[" << result[0] << ", " << result[1] << "]" << std::endl;
 	std::cout << duration << "ms" << std::endl;
 	*/
+
 	/* leetcode 2 test case
 	vector<int> list1 = { 7 };
 	vector<int> list2 = { 5};
@@ -54,21 +55,22 @@ int main() {
 		head = head->next;
 	}
 	*/
+
 	/* leetcode 3 test case
 	string s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 	string ss = "vdvf";
 	cout << solution->lengthOfLongestSubstring(ss) << endl;
 	*/
 
+	/* leetcode 5 test case
 	//string s = "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz";
 	string s = "ababbbbacda";
-	cout << solution->longestPalindrome2(s) << endl;
+	cout << solution->longestPalindrome2(s) << endl; */
 
 	/* leetcode 7 test case
 	int x = 123;
 	cout << x << " " << solution->reverse(x) << endl; */
 	
-
 	/* leetcode 8 test case
 	string str = "1  -1 a42";
 	cout << str << " => " << solution->myAtoi(str) << endl;*/
@@ -162,6 +164,10 @@ int main() {
 		}
 	}
 	cout << "}" << endl;*/
+
+    /* leetcode 128 test case 
+	vector<int> nums = { 1,2,0,1 };
+	cout << solution->longestConsecutive2(nums) << endl;*/
 
 	/* leetcode 279 test case 
 	cout << solution->numSquares(8);

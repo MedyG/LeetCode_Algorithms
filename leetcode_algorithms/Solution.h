@@ -38,6 +38,10 @@ public:
 	/* leetcode algorithms 113 https://leetcode.com/problems/path-sum-ii/#/description */
 	std::vector<std::vector<int>> pathSum(TreeNode* root, int sum); // [9ms]
 
+	/*  leetcode algorithms 128 https://leetcode.com/problems/longest-consecutive-sequence/#/description */
+	int longestConsecutive(std::vector<int>& nums);
+	int longestConsecutive2(std::vector<int>& nums);
+
 	/* leetcode algorithms 279 https://leetcode.com/problems/perfect-squares/?tab=Description */
 	int numSquares(int n); // [6ms] 静态数组动态规划
 	int numSquares2(int n);// [39ms] 递归动态规划+dfs 
