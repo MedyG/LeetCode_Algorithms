@@ -344,6 +344,56 @@ int Solution::longestConsecutive2(vector<int>& nums) {
 	return res;
 }
 
+int Solution::candy(vector<int>& ratings) {
+	int nums = ratings.size();
+	if (nums <= 1) return nums;
+	vector<int> res(nums, 1);
+	for (int i = 1; i < nums; i++) {
+		if (ratings[i] > ratings[i - 1]) {
+			res[i] = res[i - 1] + 1;
+		}
+	}
+	for (int i = nums - 1; i > 0; i--) {
+		if (ratings[i] < ratings[i - 1]) {
+			res[i - 1] = max(res[i] + 1, res[i - 1]);
+		}
+	}
+	int min_res = 0;
+	for (int i = 0; i < nums; i++) {
+		min_res += res[i];
+	}
+	return min_res;
+}
+int Solution::candy2(vector<int>& ratings) {
+	const int len = ratings.size();
+	if (len <= 1) return len;
+
+	int i, pPos, res = 1, peak = 1; // peak: # candies given to the i-1 child
+	bool neg_peak = false; // flag to indicate if it is a local dip
+	for (i = 1; i<len; i++)
+	{
+		if (ratings[i] >= ratings[i - 1])
+		{   // it is increasing
+			if (neg_peak)
+			{  // it is a local dip, we need to make sure i-1 has one candy
+				res -= (peak - 1) * (i - pPos - (peak>0));
+				peak = 1;
+				neg_peak = false;
+			}
+			// update child i candy number, if equal, set to 1
+			peak = (ratings[i] == ratings[i - 1]) ? 1 : ++peak;
+			res += peak;
+		}
+		else
+		{ // decreasing, just give one less candy, if it is the starting point of a decrease, update pPos
+			if (!neg_peak) { pPos = i - 1; neg_peak = true; }
+			res += --peak;
+		}
+	}
+	// don't forget to update res, if the last one is a local dip
+	return !neg_peak ? res : res - (peak - 1) * (i - pPos - (peak>0));
+}
+
 int Solution::numSquares(int n) {
 	if (n == 1) return 1;
 	static vector<int> dp({ 0 });

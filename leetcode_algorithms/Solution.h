@@ -39,8 +39,12 @@ public:
 	std::vector<std::vector<int>> pathSum(TreeNode* root, int sum); // [9ms]
 
 	/*  leetcode algorithms 128 https://leetcode.com/problems/longest-consecutive-sequence/#/description */
-	int longestConsecutive(std::vector<int>& nums);
-	int longestConsecutive2(std::vector<int>& nums);
+	int longestConsecutive(std::vector<int>& nums);// [12ms]
+	int longestConsecutive2(std::vector<int>& nums);// [9ms]
+
+	/* leetcode algorithms 135 https://leetcode.com/problems/candy/#/description */
+	int candy(std::vector<int>& ratings);// [29ms] O(n) space
+	int candy2(std::vector<int>& ratings);// [39ms] O(1) space
 
 	/* leetcode algorithms 279 https://leetcode.com/problems/perfect-squares/?tab=Description */
 	int numSquares(int n); // [6ms] 静态数组动态规划
