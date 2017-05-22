@@ -7,6 +7,7 @@
 #include <stack>
 #include <math.h>
 #include <unordered_set>
+#include <unordered_map>
 #include <functional>
 using namespace std;
 
@@ -261,6 +262,30 @@ double Solution::myPow(double x, int n) {
 	}
 	if (nagetive == -1) res = 1 / res;
 	return res;
+}
+
+string Solution::minWindow(string s, string t) {
+	vector<int> c(128, 0);// 记录字符出现次数
+	int start = 0, end = 0, len = INT_MAX, count = t.size(), head;
+	for (int i = 0; i < t.size(); i++) {
+		c[t[i]]++;
+	}
+	while (end < s.size()) {
+		/* 遍历到t中的字符后需要找的字符数-1 */
+		if (c[s[end]] > 0) count--;
+		c[s[end]]--;// -1代表该字符不在t中
+		end++;
+		/* 当t中所有字符都出现后 */
+		while (count == 0) {
+			if (end - start < len) {
+				head = start;
+				len = end - start;
+			}
+			if (c[s[start]]++ == 0) count++;// 头部后移的时候子串中缺少了t中某个元素
+			start++;
+		}
+	}
+	return len == INT_MAX ? "" : s.substr(head, len);
 }
 
 vector<vector<int>> Solution::pathSum(TreeNode* root, int sum) {
