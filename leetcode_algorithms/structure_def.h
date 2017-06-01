@@ -9,7 +9,7 @@ struct ListNode {
 	ListNode(int x) : val(x), next(NULL) {};
 };
 
-/* leetcode algorithms 113 Definition for a binary tree node.*/
+/* leetcode algorithms 98, 113 Definition for a binary tree node.*/
 struct TreeNode {
 	int val;
 	TreeNode *left;

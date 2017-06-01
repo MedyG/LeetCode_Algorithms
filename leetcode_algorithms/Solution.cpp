@@ -288,6 +288,30 @@ string Solution::minWindow(string s, string t) {
 	return len == INT_MAX ? "" : s.substr(head, len);
 }
 
+bool Solution::isValidBST(TreeNode* root) {
+	if (root == NULL) return true;
+	signed long long int prv = LLONG_MIN;
+	TreeNode* _root = root;
+	stack<TreeNode*> sequence;
+	while (_root != NULL || !sequence.empty()) {
+		if (_root != NULL) {
+			sequence.push(_root);
+			_root = _root->left;
+		}
+		else {
+			_root = sequence.top();
+			//访问
+			if (_root->val <= prv) {
+				return false;
+			}
+			sequence.pop();
+			prv = _root->val;
+			_root = _root->right;
+		}
+	}
+	return true;
+}
+
 vector<vector<int>> Solution::pathSum(TreeNode* root, int sum) {
 	vector<vector<int>> res;
 	vector<TreeNode*> nodePath; // 储存路径节点

@@ -38,6 +38,9 @@ public:
 	/* leetcode algorithms 76 https://leetcode.com/problems/minimum-window-substring/#/description */
 	std::string minWindow(std::string s, std::string t);// [9ms]
 
+	/* leetcode algorithms 98 https://leetcode.com/problems/validate-binary-search-tree/#/description  */
+	bool isValidBST(TreeNode* root);// [13ms] ÖÐÐò±éÀú
+
 	/* leetcode algorithms 113 https://leetcode.com/problems/path-sum-ii/#/description */
 	std::vector<std::vector<int>> pathSum(TreeNode* root, int sum); // [9ms]
 
