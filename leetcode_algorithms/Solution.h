@@ -32,6 +32,9 @@ public:
 	/* leetcode algorithms 18 https://leetcode.com/problems/4sum/?tab=Description */
 	std::vector<std::vector<int>> fourSum(std::vector<int>& nums, int target); // [15ms] 
 
+	/* leetcode algorithms 27 https://leetcode.com/problems/remove-element/#/description */
+	int removeElement(vector<int>& nums, int val);// [6ms]
+
 	/* leetcode algorithms 50 https://leetcode.com/problems/powx-n/#/description */
 	double myPow(double x, int n);// [9ms]
 
@@ -51,6 +54,9 @@ public:
 	/* leetcode algorithms 135 https://leetcode.com/problems/candy/#/description */
 	int candy(std::vector<int>& ratings);// [29ms] O(n) space
 	int candy2(std::vector<int>& ratings);// [39ms] O(1) space
+
+	/* leetcode algorithms 233 https://leetcode.com/problems/number-of-digit-one/#/description */
+	int countDigitOne(int n);// [0ms]
 
 	/* leetcode algorithms 279 https://leetcode.com/problems/perfect-squares/?tab=Description */
 	int numSquares(int n); // [6ms] 静态数组动态规划

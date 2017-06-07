@@ -116,7 +116,8 @@ int main() {
 	string s = "123abcdefg";
 	string t = "1g";
 	cout << s << endl << t << endl << solution->minWindow(s, t) << endl;*/
-
+    
+    /* leetcode 98 test case 
 	vector<int> input = { INT_MIN };
 	//int a = (0 - 2147483648);
 	//cout << a  << INT_MIN << endl;
@@ -150,7 +151,7 @@ int main() {
 		q.push(root->right);
 	}
 	if (solution->isValidBST(_root)) cout << "yes" << endl;
-	else cout << "no" << endl;
+	else cout << "no" << endl;*/
 
 	/* leetcode algorithms 113 test case
 	//vector<int> input = { 5,4,8,11,NULL,13,4,7,2,NULL,NULL,5,1 };
@@ -209,6 +210,9 @@ int main() {
 	vector<int> nums = { 1,2,0,1 };
 	cout << solution->longestConsecutive2(nums) << endl;*/
 
+    /* leetcode 233 test case */
+    int n = 23;
+	cout << solution->countDigitOne(n) << endl;
 	/* leetcode 279 test case
 	cout << solution->numSquares(8);
 	*/

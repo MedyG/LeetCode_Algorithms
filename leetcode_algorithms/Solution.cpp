@@ -225,6 +225,19 @@ vector<vector<int>> Solution::fourSum(vector<int>&nums, int target) {
 	return result;
 }
 
+int Solution::removeElement(vector<int>& nums, int val) {
+	int len = nums.size();
+	for (int i = 0; i < len;) {
+		if (nums[i] == val) {
+			swap(nums[i], nums[--len]);
+		}
+		else {
+			i++;
+		}
+	}
+	return len;
+}
+
 double Solution::myPow(double x, int n) {
 	vector<double> fx; // 使用数组记录低阶的计算结果
 	double res = 1;
@@ -441,6 +454,42 @@ int Solution::candy2(vector<int>& ratings) {
 	}
 	// don't forget to update res, if the last one is a local dip
 	return !neg_peak ? res : res - (peak - 1) * (i - pPos - (peak>0));
+}
+
+int Solution::countDigitOne(int n) {
+	/* S(n) = 10 * (10^(n - 2) + S(n-1))
+		where S(n) is the sum of 1 of the number of n digits
+		and it follows that S(0) = 0 digits S(1) = 1 ... S(n) = n * 10^(n - 1)
+	*/
+	if (n <= 0) return 0;
+	if (n < 10) return 1;
+	int res = 0;
+	int tmp = n;
+	int digits = 0; // digits of n
+	vector<int> S; // Sn
+	vector<int> N; // N[i] represents the number of (i - 1) digit
+	while (tmp) {
+		N.push_back(tmp % 10);
+		tmp /= 10;
+		S.push_back(digits++ * pow(10, digits - 1));
+	}
+	while (!N.empty()) {
+		if (N.back() == 0) {
+			N.pop_back();
+			continue;
+		}
+		res += S[N.size() - 1];
+		if (N.back() > 1) {
+			int m = N.size() - 1;
+			res = res + pow(10, m) + (N.back() - 1) * S[m]; // S[m] + (m - 2) * S[m]
+			n -= N.back() * pow(10, N.size() - 1);
+		}
+		else {
+			res = res + (n -= N.back() * pow(10, N.size() - 1)) + 1;
+		}
+		N.pop_back();
+	}
+	return res;
 }
 
 int Solution::numSquares(int n) {
