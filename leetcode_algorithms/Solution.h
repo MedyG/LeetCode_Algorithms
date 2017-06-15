@@ -41,6 +41,9 @@ public:
 	/* leetcode algorithms 76 https://leetcode.com/problems/minimum-window-substring/#/description */
 	std::string minWindow(std::string s, std::string t);// [9ms]
 
+	/* leetcode algorithms 78 https://leetcode.com/problems/subsets/#/description */
+	std::vector<std::vector<int>> subsets(std::vector<int>& nums);// [6ms]
+
 	/* leetcode algorithms 98 https://leetcode.com/problems/validate-binary-search-tree/#/description  */
 	bool isValidBST(TreeNode* root);// [13ms] ÖÐÐò±éÀú
 

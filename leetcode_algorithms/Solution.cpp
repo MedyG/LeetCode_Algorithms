@@ -301,6 +301,25 @@ string Solution::minWindow(string s, string t) {
 	return len == INT_MAX ? "" : s.substr(head, len);
 }
 
+vector<vector<int>> Solution::subsets(vector<int>& nums) {
+	vector<vector<int>> res;
+	if (nums.size() <= 0) {
+		res.push_back(nums);
+		return res;
+	}
+	vector<int> currentSet = {};
+	res.push_back(currentSet);
+	for (int i = 0; i < nums.size(); i++) {
+		int currentLen = res.size();
+		for (int j = 0; j < currentLen; j++) {
+			currentSet = res[j];
+			currentSet.push_back(nums[i]);
+			res.push_back(currentSet);
+		}
+	}
+	return res;
+}
+
 bool Solution::isValidBST(TreeNode* root) {
 	if (root == NULL) return true;
 	signed long long int prv = LLONG_MIN;
