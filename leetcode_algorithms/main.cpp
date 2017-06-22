@@ -5,6 +5,83 @@
 
 using namespace std;
 
+int F(int k, int n) {
+	if (k <= 0) return n;
+	if (n <= 1) return 1;
+	return (F(k, n - 1) + F(k - 1, n));
+}
+int assignConferenceRoom(vector<int>& A, vector<int>& B) {
+	std::sort(A.begin(), A.end());
+	std::sort(B.begin(), B.end());
+	int i = 0, j = 0;
+	int res = 0;
+	while (j < B.size() && i < A.size()) {
+		if (B[j] < A[i]) {
+			j++;
+			continue;
+		}
+		else {
+			i++;
+			j++;
+			res++;
+		}
+	}
+	return res;
+}
+bool isDAG(int n, vector<pair<int, int>>& edges) {
+	std::vector<int> in(n, 0);
+	//std::vector<std::vector<int >> graph(n, std::vector<int>(n,0));
+	std::queue<int> q;
+	for (int i = 0; i < edges.size(); i++) {
+		in[edges[i].second]++;
+		//graph[edges[i].first][edges[i].second]++;
+	}
+	for (int i = 0; i < in.size(); i++) {
+		if (in[i] == 0) {
+			q.push(i);
+			in[i]--;
+		}
+	}
+	while (!q.empty()) {
+		int start = q.front();
+		q.pop();
+		for (int i = 0; i < edges.size();) {
+			if (edges[i].first == start) {
+				in[edges[i].second]--;
+				if (in[edges[i].second] == 0) {
+					q.push(edges[i].second);
+					in[edges[i].second]--;
+				}
+				edges.erase(edges.begin() + i);
+			}
+			else {
+				i++;
+			}
+		}
+	}
+	if (edges.size() > 0) return false;
+	return true;
+}
+int maxSum(vector<int>& A) {
+	if (A.size() == 1) return A[0];
+	int current = 0, pre = 0, i = 2;
+	pre = A[0];
+	current = A[1];
+	while (i < A.size()) {
+		if (A[i] + pre > current) {
+			int tmp = current;
+			current = A[i] + pre;
+			pre = tmp;
+		}
+		else {
+			pre = current;
+		}
+		i++;
+	}
+	return max(current,pre);
+}
+
+
 int main() {
 	// param definition
 	Solution* solution = new Solution();
@@ -210,9 +287,9 @@ int main() {
 	vector<int> nums = { 1,2,0,1 };
 	cout << solution->longestConsecutive2(nums) << endl;*/
 
-    /* leetcode 233 test case */
+    /* leetcode 233 test case 
     int n = 23;
-	cout << solution->countDigitOne(n) << endl;
+	cout << solution->countDigitOne(n) << endl;*/
 	/* leetcode 279 test case
 	cout << solution->numSquares(8);
 	*/
@@ -244,5 +321,10 @@ int main() {
 	}
 	cout << "}" << endl;
 	*/
+vector<int> A = { 3,4,5,10,1,2 };
+vector<int> B = { 10,3,2, 1000 };
+vector<pair<int, int>> edges = {pair<int,int>(0, 1), pair<int,int>(1, 2), pair<int,int>(2,0)};
+int n = 3;
+cout << isDAG(n, edges)<< endl;
 	return 0;
 }

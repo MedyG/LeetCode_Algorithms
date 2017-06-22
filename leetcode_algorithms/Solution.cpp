@@ -475,6 +475,25 @@ int Solution::candy2(vector<int>& ratings) {
 	return !neg_peak ? res : res - (peak - 1) * (i - pPos - (peak>0));
 }
 
+TreeNode* Solution::invertTree(TreeNode* root) {
+	if (root == NULL) return root;
+	stack<TreeNode* > s;
+	TreeNode* current = root;
+	s.push(current);
+	while (!s.empty()) {
+		current = s.top();
+		s.pop();
+		swap(current->left, current->right);
+		if (current->left != NULL) {
+			s.push(current->left);
+		}
+		if (current->right != NULL) {
+			s.push(current->right);
+		}
+	}
+	return root;
+}
+
 int Solution::countDigitOne(int n) {
 	/* S(n) = 10 * (10^(n - 2) + S(n-1))
 		where S(n) is the sum of 1 of the number of n digits
