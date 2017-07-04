@@ -35,6 +35,9 @@ public:
 	/* leetcode algorithms 27 https://leetcode.com/problems/remove-element/#/description */
 	int removeElement(std::vector<int>& nums, int val);// [6ms]
 
+	/* leetcode algorithms 32 https://leetcode.com/problems/longest-valid-parentheses/#/description */
+	int longestValidParentheses(std::string s); // [16ms]
+
 	/* leetcode algorithms 50 https://leetcode.com/problems/powx-n/#/description */
 	double myPow(double x, int n);// [9ms]
 

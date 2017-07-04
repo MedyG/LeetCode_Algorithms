@@ -238,6 +238,35 @@ int Solution::removeElement(vector<int>& nums, int val) {
 	return len;
 }
 
+int Solution::longestValidParentheses(string s) {
+	int start = 0, end = 0;
+	int res = 0;
+	stack<pair<char, int>> stk;
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == '(') {
+			stk.push(pair<char, int>(s[i], i));
+		}
+		else if (s[i] == ')') {
+			if (!stk.empty() && stk.top().first == '(') {
+				stk.pop();
+			}
+			else {
+				stk.push(pair<char, int>(s[i], i));
+			}
+		}
+	}
+	end = s.size();
+	if (stk.empty()) return s.size();
+	while (!stk.empty()) {
+		start = stk.top().second;
+		stk.pop();
+		res = max(res, end - start > 1 ? end - start - 1 : 0);
+		end = start;
+	}
+	if (end > 0) res = max(res, end);
+	return res;
+}
+
 double Solution::myPow(double x, int n) {
 	vector<double> fx; // 使用数组记录低阶的计算结果
 	double res = 1;

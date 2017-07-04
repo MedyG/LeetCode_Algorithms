@@ -2,9 +2,42 @@
 #include <time.h>
 #include <queue>
 #include <iostream>
-
+#include <stack>
 using namespace std;
 
+TreeNode* buildBinaryTree(vector<int>& input) {
+	queue<TreeNode*> q;
+	int index = 0;
+	TreeNode* root = new TreeNode(input[index++]);
+	TreeNode* _root = root; // return root;
+	q.push(root);
+	while (!q.empty() && index < input.size()) {
+		root = q.front();
+		q.pop();
+		if (root == NULL) continue;
+		TreeNode* l, *r;
+		if (input[index] == NULL) {
+			l = NULL;
+			index++;
+		}
+		else {
+			l = new TreeNode(input[index++]);
+		}
+		if (input[index] == NULL) {
+			r = NULL;
+			index++;
+		}
+		else {
+			r = new TreeNode(input[index++]);
+		}
+		root->left = l;
+		root->right = r;
+		q.push(root->left);
+		q.push(root->right);
+	}
+	return _root;
+}
+// 算法机考模拟题
 int F(int k, int n) {
 	if (k <= 0) return n;
 	if (n <= 1) return 1;
@@ -80,8 +113,72 @@ int maxSum(vector<int>& A) {
 	}
 	return max(current,pre);
 }
-
-
+bool isEqual(TreeNode* p, TreeNode* q) {
+	if (p == NULL && q == NULL) return true;
+	if (p != NULL && q == NULL) return false;
+	if (p == NULL && q != NULL) return false;
+	stack<TreeNode*> sp, sq;
+	TreeNode* curp,* curq;
+	curp = p;
+	curq = q;
+	sp.push(curp);
+	sq.push(curq);
+	while (!sp.empty() && !sq.empty()) {
+		curp = sp.top();
+		curq = sq.top();
+		sp.pop();
+		sq.pop();
+		if (curp->val != curq->val) return false;
+		if (curp->right != NULL && curq->right != NULL) {
+			sp.push(curp->right);
+			sq.push(curq->right);
+		}
+		else if (curp->right == NULL && curq->right != NULL){
+			return false;
+		}
+		else if (curp->right != NULL && curq->right == NULL) {
+			return false;
+		}
+		if (curp->left != NULL && curq->left != NULL) {
+			sp.push(curp->left);
+			sq.push(curq->left);
+		}
+		else if (curp->left == NULL && curq->left != NULL){
+			return false;
+		}
+		else if (curp->left != NULL && curq->left == NULL) {
+			return false;
+		}
+	}
+	return true;
+}
+int visitNeighborOne(const vector<vector<char>>&A, vector<vector<bool>>& visited, int i, int j) {
+	if (i < 0 || j < 0 || i > A.size() - 1 || j > A[0].size() - 1) return 0;
+	if (visited[i][j]) return 0;
+	visited[i][j] = true;
+	if (A[i][j] == '0') {
+		return 0;
+	}
+	else {
+		visitNeighborOne(A, visited, i + 1, j);
+		visitNeighborOne(A, visited, i - 1, j);
+		visitNeighborOne(A, visited, i, j + 1);
+		visitNeighborOne(A, visited, i, j - 1);
+	}
+	return 1;
+}
+int countConnectedOnes(vector<vector<char>>& A) {
+	if (A.size() == 0) return 0;
+	if (A[0].size() == 0) return 0;
+	vector<vector<bool>> visited(A.size(), vector<bool>(A.size(), false));
+	int res = 0;
+	for (int i = 0; i < A.size(); i++) {
+		for (int j = 0; j < A[0].size(); j++) {
+			res += visitNeighborOne(A, visited, i, j);
+		}
+	}
+	return res;
+}
 int main() {
 	// param definition
 	Solution* solution = new Solution();
@@ -185,6 +282,10 @@ int main() {
 		}
 	}
 	cout << "}" << endl;*/
+
+/* leetcode 32 test case */
+string s = "())";
+cout << solution->longestValidParentheses(s) << endl;
 
 	/* leetcode 50 test case
 	cout << solution->myPow(2, -2) << endl;*/
@@ -321,10 +422,21 @@ int main() {
 	}
 	cout << "}" << endl;
 	*/
-vector<int> A = { 3,4,5,10,1,2 };
-vector<int> B = { 10,3,2, 1000 };
-vector<pair<int, int>> edges = {pair<int,int>(0, 1), pair<int,int>(1, 2), pair<int,int>(2,0)};
-int n = 3;
-cout << isDAG(n, edges)<< endl;
+//vector<int> A = { 3,4,5,10,1,2 };
+//vector<int> B = { 10,3,2, 1000 };
+//vector<pair<int, int>> edges = {pair<int,int>(0, 1), pair<int,int>(1, 2), pair<int,int>(2,0)};
+//int n = 3;
+//cout << isDAG(n, edges)<< endl;
+
+//vector<int> tp = { 1,2,3,4,NULL };
+//vector<int> tq = { 1,2,3,NULL, 4 };
+//TreeNode* p = buildBinaryTree(tp);
+//TreeNode* q = buildBinaryTree(tq);
+//cout << isEqual(p, q) << endl;
+//vector<vector<char>> A = { { '0','0','0' },{ '0','0','0' },{ '0', '0', '1' } };
+//vector<vector<char>> A1 = {  };
+//	cout << countConnectedOnes(A) <<endl;
+
+
 	return 0;
 }
