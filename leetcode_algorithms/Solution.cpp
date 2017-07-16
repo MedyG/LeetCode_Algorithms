@@ -6,6 +6,7 @@
 #include <array>
 #include <stack>
 #include <math.h>
+#include <queue>
 #include <unordered_set>
 #include <unordered_map>
 #include <functional>
@@ -193,6 +194,35 @@ int Solution::myAtoi(string str) {
 		}
 	}
 	return nagetive ? 0 - res : res;
+}
+
+bool Solution::isMatch(string s, string p) {
+	int slen = s.size();
+	int plen = p.size();
+	/* match[i][j]=true表示s[0, ..., i - 1]与p[0, ..., j - 1]匹配 */
+	vector<vector<bool>> match(slen + 1, vector<bool>(plen + 1, false));
+	match[0][0] = true;
+	/* p匹配空串s，当且仅当p[j - 1]是'*'且p[0, ..., j - 3]匹配空串 */
+	for (int j = 1; j <= plen; j++) {
+		match[0][j] = j > 1 && p[j - 1] == '*' && match[0][j - 2];
+	}
+	/* 1）p[j - 1]不是'*'， 那么match[i][j]，
+		当且仅当p[j - 1] == s[i - 1]且match[i - 1][j - 1]
+		2）p[j - 1]是'*'，那么match[i][j]，
+		当且仅当a或b，
+		a）'p[j - 2]*'匹配空串，即match[i][j - 2]
+		b）'p[j - 2]*'匹配'p[j - 2]*p[j - 2]'，即p[j - 2] == s[i - 1]且match[i - 1][j] */
+	for (int i = 1; i <= slen; i++) {
+		for (int j = 1; j <= plen; j++) {
+			if (p[j - 1] != '*') {
+				match[i][j] = match[i - 1][j - 1] && (s[i - 1] == p[j - 1] || p[j - 1] == '.');
+			}
+			else {
+				match[i][j] = match[i][j - 2] || (s[i - 1] == p[j - 2] || p[j - 2] == '.') && match[i - 1][j];
+			}
+		}
+	}
+	return match[slen][plen];
 }
 
 vector<vector<int>> Solution::fourSum(vector<int>&nums, int target) {
