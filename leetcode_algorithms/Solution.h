@@ -30,7 +30,7 @@ public:
 	int myAtoi(std::string str); // [19ms]
 
 	/* leetcode algorithms 10 https://leetcode.com/problems/regular-expression-matching/#/description */
-	bool isMatch(std::string s, std::string p);// [6ms] 动态规划from leetcode solution
+	bool isMatch(std::string s, std::string p);// [6ms] 动态规划 from leetcode solution
 
 	/* leetcode algorithms 18 https://leetcode.com/problems/4sum/?tab=Description */
 	std::vector<std::vector<int>> fourSum(std::vector<int>& nums, int target); // [15ms] 
@@ -69,6 +69,9 @@ public:
 
 	/* leetcode algorithms 233 https://leetcode.com/problems/number-of-digit-one/#/description */
 	int countDigitOne(int n);// [0ms]
+
+	/* leetcode algorithms 242 https://leetcode.com/problems/valid-anagram/#/description */
+	bool isAnagram(string s, string t); //[9ms]
 
 	/* leetcode algorithms 279 https://leetcode.com/problems/perfect-squares/?tab=Description */
 	int numSquares(int n); // [6ms] 静态数组动态规划

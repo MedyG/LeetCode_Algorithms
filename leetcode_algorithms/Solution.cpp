@@ -589,6 +589,19 @@ int Solution::countDigitOne(int n) {
 	return res;
 }
 
+bool Solution::isAnagram(string s, string t) {
+	vector<int> a(126, 0);
+	if (s.size() != t.size()) return false;
+	for (int i = 0; i < s.size(); i++) {
+		a[s[i]]++;
+	}
+	for (int j = 0; j < t.size(); j++) {
+		if (a[t[j]] == 0) return false;
+		a[t[j]]--;
+	}
+	return true;
+}
+
 int Solution::numSquares(int n) {
 	if (n == 1) return 1;
 	static vector<int> dp({ 0 });
