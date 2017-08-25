@@ -18,7 +18,7 @@ public:
 	/* leetcode algorithms 3 https://leetcode.com/problems/longest-substring-without-repeating-characters/?tab=Description */
 	int lengthOfLongestSubstring(std::string s);// [36ms]
 	int lengthOfLongestSubString2(std::string s);// 动态规划 [18ms]
-	
+
 	/* leetcode algorithms 5  https://leetcode.com/problems/longest-palindromic-substring/#/description */
 	std::string longestPalindrome(std::string s); // [252ms] O(n^3)
 	std::string longestPalindrome2(std::string s); // [75ms] 动态规划
@@ -43,6 +43,9 @@ public:
 
 	/* leetcode algorithms 50 https://leetcode.com/problems/powx-n/#/description */
 	double myPow(double x, int n);// [9ms]
+
+	/* leetcode algorithms 72 https://leetcode.com/problems/edit-distance/description/ */
+	int minDistance(std::string word1, std::string word2); // [9ms] dp
 
 	/* leetcode algorithms 76 https://leetcode.com/problems/minimum-window-substring/#/description */
 	std::string minWindow(std::string s, std::string t);// [9ms]
@@ -71,7 +74,7 @@ public:
 	int countDigitOne(int n);// [0ms]
 
 	/* leetcode algorithms 242 https://leetcode.com/problems/valid-anagram/#/description */
-	bool isAnagram(string s, string t); //[9ms]
+	bool isAnagram(std::string s, std::string t); //[9ms]
 
 	/* leetcode algorithms 279 https://leetcode.com/problems/perfect-squares/?tab=Description */
 	int numSquares(int n); // [6ms] 静态数组动态规划
@@ -88,5 +91,28 @@ public:
 private:
 	int numSquares_dfs(int n, int count, int*dp);
 };
+
+/* leetcode algorithms 307 https://leetcode.com/problems/range-sum-query-mutable/#/description */
+class NumArray {
+private:
+	std::vector<int> nums;
+public:
+	NumArray(std::vector<int> nums) {
+		this->nums = nums;
+	}
+
+	void update(int i, int val) {
+		this->nums[i] = val;
+	}
+
+	int sumRange(int i, int j) {
+		int sum = 0;
+		for (int head = i; head <= j; head++) {
+			sum += this->nums[head];
+		}
+		return sum;
+	}
+};//用segmentTree，O(log(n))
+
 #endif // !SOLUTION_H
 

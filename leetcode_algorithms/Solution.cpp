@@ -336,6 +336,25 @@ double Solution::myPow(double x, int n) {
 	return res;
 }
 
+int Solution::minDistance(string word1, string word2) {
+	int m = word1.size();
+	int n = word2.size();
+	vector<vector<int>> E(m + 1, vector<int>(n + 1, 0));
+	for (int i = 0; i <= m; i++) {
+		E[i][0] = i;
+	}
+	for (int j = 1; j <= n; j++) {
+		E[0][j] = j;
+	}
+	for (int i = 1; i <= m; i++) {
+		for (int j = 1; j <= n; j++) {
+			/* 子问题为三个 */
+			E[i][j] = min(min(E[i - 1][j] + 1, E[i][j - 1] + 1), E[i - 1][j - 1] + (word1[i - 1] == word2[j - 1] ? 0 : 1));
+		}
+	}
+	return E[m][n];
+}
+
 string Solution::minWindow(string s, string t) {
 	vector<int> c(128, 0);// 记录字符出现次数
 	int start = 0, end = 0, len = INT_MAX, count = t.size(), head;
